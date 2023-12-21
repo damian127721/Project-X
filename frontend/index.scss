@@ -1,0 +1,84 @@
+/* PROMĚNNÉ */
+
+$h1: 95px;
+$h2: 68px;
+$h3: 48px;
+$h4: 34px;
+$h5: 24px;
+$h6: 17px;
+$regular: 14px;
+
+$black: #011222;
+$black-75: #011222;
+$black-50: #808890;
+$black-25: #BFC4C8;
+$black-15: #D9DBDE;
+$black-5: #F2F3F4;
+
+$primary: #055CAC;
+$secondary: #08EAF8;
+$tertiary: #0B1A46;
+
+/* RESET */
+
+*, *::before, *::after, :root, body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("./assets/background.png");
+    margin: 40px 80px 0 80px;
+    justify-content: space-between;
+}
+
+img {
+    display: block;
+}
+
+h1 {
+    color: $black-5;
+    font-size: $h1;
+}
+
+/* WELCOME PAGE */
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    li {
+        font-size: $h6;
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: $black-5;
+    }
+}
+
+.welcome-front {
+    width: 1280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 218px auto 0 auto;
+
+    .login {
+        .text-input {
+            display: block;
+        }
+        .right-middle-flex {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+    }
+    .representative-frame {
+        border-radius: 20px;
+        width: 608px;
+        height: 500px;
+        background: url("./assets/illusration.png");
+    }
+}

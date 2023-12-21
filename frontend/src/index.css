@@ -1,4 +1,59 @@
+@charset "UTF-8";
+/* PROMĚNNÉ */
+/* RESET */
+*, *::before, *::after, :root, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("./assets/background.png");
+  margin: 40px 80px 0 80px;
+  justify-content: space-between;
+}
+
+img {
+  display: block;
+}
+
+h1 {
+  color: #F2F3F4;
+  font-size: 95px;
+}
+
+/* WELCOME PAGE */
 .nav-list {
   display: flex;
   justify-content: space-between;
+}
+.nav-list li {
+  font-size: 17px;
+  list-style-type: none;
+}
+.nav-list a {
+  text-decoration: none;
+  color: #F2F3F4;
+}
+
+.welcome-front {
+  width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 218px auto 0 auto;
+}
+.welcome-front .login .text-input {
+  display: block;
+}
+.welcome-front .login .right-middle-flex {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.welcome-front .representative-frame {
+  border-radius: 20px;
+  width: 608px;
+  height: 500px;
+  background: url("./assets/illusration.png");
 }

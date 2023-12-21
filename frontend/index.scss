@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Signika+Negative:wght@400;600&family=Ubuntu:wght@500&display=swap');
+
 /* PROMĚNNÉ */
 
 $h1: 95px;
@@ -8,8 +10,11 @@ $h5: 24px;
 $h6: 17px;
 $regular: 14px;
 
+$headings-family: 'Ubuntu', sans-serif;
+$regular-text-family: 'Ubuntu', sans-serif;
+
 $black: #011222;
-$black-75: #011222;
+$black-75: #404D59;
 $black-50: #808890;
 $black-25: #BFC4C8;
 $black-15: #D9DBDE;
@@ -18,8 +23,9 @@ $black-5: #F2F3F4;
 $primary: #055CAC;
 $secondary: #08EAF8;
 $tertiary: #0B1A46;
+$error: #FA0400;
 
-/* RESET */
+/* RESET and COMMON ELEMENTS */
 
 *, *::before, *::after, :root, body {
     box-sizing: border-box;
@@ -37,9 +43,71 @@ img {
     display: block;
 }
 
-h1 {
+input {
+    border-style: none;
+}
+
+p {
+    font-family: $regular-text-family;
+    font-size: $regular;
     color: $black-5;
+}
+
+h1, h4 {
+    color: $black-5;
+    font-family: $headings-family;
+    font-weight: 500;
+}
+
+h1 {
     font-size: $h1;
+}
+
+h4 {
+    font-size: $h4;
+}
+
+input {
+    outline: none;
+    display: block;
+}
+
+/* REUSABLE TOOLS */
+
+.text-input {
+    font-family: $regular-text-family;
+    font-size: $regular;
+    color: $black-5;
+    background-color: $tertiary;
+    border: 2px solid $black-5;
+    width: 400px;
+    border-radius: 10px;
+    padding: 16px 24px;
+
+    &:focus {
+        border-color: $secondary;
+    }
+
+    &.error {
+        border-color: $error;
+    }
+
+    &.not-avaible {
+        border-color: $black-25;
+        background-color: $black-75;
+        color: $black-25;
+        pointer-events: none;
+    }
+}
+
+.equal-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.bold {
+    font-weight: bolder;
 }
 
 /* WELCOME PAGE */
@@ -65,20 +133,77 @@ h1 {
     align-items: flex-end;
     margin: 218px auto 0 auto;
 
-    .login {
-        .text-input {
-            display: block;
+    .spaceship {
+        display: flex;
+        justify-content: space-between;
+        transform: rotateZ(10deg);
+        transform-origin: center;
+        position: absolute;
+        top: 140px;
+        left: 576px;
+        .space {
+            width: 0px;
         }
-        .right-middle-flex {
+        .spaceship-stream {
+            margin: 0 0 -10px -10px;
+            animation-name: stream;
+            animation-duration: 2s;
+            animation-direction: alternate;
+            animation-iteration-count: 2;
+        }
+        .spaceship-cabine {
+            animation-name: cabine;
+            animation-duration: 2s;
+            animation-direction: alternate;
+            animation-iteration-count: 2;
+        }
+
+        @keyframes stream {
+            from {
+                margin: 0 0 -10px -10px;
+            }
+            to {
+                margin: 0 -600px -10px 0;
+            }
+        }
+
+        @keyframes cabine {
+            from {
+                margin: 0 0 0px 0px;
+            }
+            to {
+                margin: 0 0 0 -300px;
+            }   
+        }
+    }
+    
+    .login {
+        h1 {
+            margin-bottom: 80px;
+        }
+        .equal-flex {
             display: flex;
-            justify-content: right;
+            flex-direction: column;
             align-items: center;
+            height: 215px;
+
+            .right-middle-flex {
+                display: flex;
+                justify-content: right;
+                align-items: center;
+                align-self: flex-end;
+            }
+
+            p {
+                margin-right: 24px;
+            }
         }
     }
     .representative-frame {
         border-radius: 20px;
         width: 608px;
         height: 500px;
-        background: url("./assets/illusration.png");
+        background: url("./assets/illustration.png");
+        background-repeat: no-repeat;
     }
 }

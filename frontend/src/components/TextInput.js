@@ -1,7 +1,7 @@
 import React from "react"
 
-export default function TextInput({placeholder, type}) {
+export default function TextInput({placeholder, type, state}) {
     return (
-        <input className="text-input" placeholder={placeholder} type={type} />
+        <input className={`text-input ${state}`} placeholder={placeholder} type={type} />
     )
 }

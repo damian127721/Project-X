@@ -1,15 +1,12 @@
 import React from "react"
 import { useState } from "react"
-/* import {useLottie} from "lottie-react"
+import {useLottie} from "lottie-react"
 import NavList from "../components/NavList"
 import TextInput from "../components/TextInput"
 import robotAnimation from "../assets/robot-animation.json"
 import spaceshipStream from "../assets/spaceship-stream.svg"
 import spaceshipCabine from "../assets/spaceship-cabine.svg"
-import welcomeTabs from "../assets/welcome-tabs.json" */
-
-import { Routes, Route, Link } from "react-router-dom"
-import WelcomeLogin from "./WelcomeLogin"
+import welcomeTabs from "../assets/welcome-tabs.json"
 
 export default function Welcome() {
     const [underlineLeft, setUnderlineLeft] = useState("tvorba")
@@ -66,8 +63,4 @@ export default function Welcome() {
             </main>
         </>
     )
-}
-
-function Welcome() {
-
 }

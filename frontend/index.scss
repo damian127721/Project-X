@@ -34,9 +34,12 @@ $error: #FA0400;
 }
 
 body {
-    background: url("./assets/background.png");
+    background: url("./assets/background.png") no-repeat;
+    background-size: cover;
+}
+
+.body-layout {
     margin: 40px 80px 0 80px;
-    justify-content: space-between;
 }
 
 img {
@@ -47,24 +50,48 @@ input {
     border-style: none;
 }
 
+
+
 p {
-    font-family: $regular-text-family;
-    font-size: $regular;
     color: $black-5;
 }
 
-h1, h4 {
+p {
+    font-family: $regular-text-family;
+    font-size: $regular;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h4, a {
     color: $black-5;
     font-family: $headings-family;
     font-weight: 500;
+}
+
+li, h5 {
+    color: $black-5;
+    font-family: $headings-family;
+
 }
 
 h1 {
     font-size: $h1;
 }
 
+h2 {
+    font-size: $h2;
+}
+
 h4 {
     font-size: $h4;
+}
+
+
+h5 {
+    font-size: $h5;
 }
 
 input {
@@ -119,11 +146,6 @@ input {
         font-size: $h6;
         list-style-type: none;
     }
-
-    a {
-        text-decoration: none;
-        color: $black-5;
-    }
 }
 
 .welcome-front {
@@ -134,6 +156,10 @@ input {
     margin: 218px auto 0 auto;
 
     .spaceship {
+        z-index: 1;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
         display: flex;
         justify-content: space-between;
         transform: rotateZ(10deg);
@@ -141,9 +167,6 @@ input {
         position: absolute;
         top: 140px;
         left: 576px;
-        .space {
-            width: 0px;
-        }
         .spaceship-stream {
             margin: 0 0 -10px -10px;
             animation-name: stream;
@@ -153,7 +176,8 @@ input {
         }
         .spaceship-cabine {
             animation-name: cabine;
-            animation-duration: 2s;
+            animation-delay: 0.5s;
+            animation-duration: 1.5s;
             animation-direction: alternate;
             animation-iteration-count: 2;
         }
@@ -200,10 +224,59 @@ input {
         }
     }
     .representative-frame {
+        position: relative;
         border-radius: 20px;
         width: 608px;
         height: 500px;
         background: url("./assets/illustration.png");
         background-repeat: no-repeat;
+    }
+}
+
+.welcome-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 0 96px 0;
+    margin-top: 400px;
+    background-color: $tertiary;
+    
+    ul {
+        margin: 40px 0 64px 0;
+
+        li {
+            display: inline-block;
+            margin-inline: 12px;
+            font-size: $h5;
+            cursor: pointer;
+        }
+
+        &.underline-left-tvorba::after, &.underline-left-zamer::after, &.underline-left-nastroje::after, &.underline-left-namet::after {
+            display: block;
+            content: "";
+            height: 2px;
+            width: 100px;
+            margin-top: 2px;
+            background-color: $black-5;
+            transition: transform 0.3s;
+        }
+
+        &.underline-left-zamer::after {
+            transform: translateX(95px);
+        }
+
+        &.underline-left-nastroje::after {
+            transform: translateX(205px);
+        }
+
+        &.underline-left-namet::after {
+            transform: translateX(314px);
+        }
+    }
+
+    p {
+        text-align: center;
+        width: 340px;
+        height: 160px;
     }
 }

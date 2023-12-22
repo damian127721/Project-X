@@ -1,15 +1,13 @@
 import React from "react"
 import { useState } from "react"
-/* import {useLottie} from "lottie-react"
+import { Link } from "react-router-dom"
+import {useLottie} from "lottie-react"
 import NavList from "../components/NavList"
 import TextInput from "../components/TextInput"
 import robotAnimation from "../assets/robot-animation.json"
 import spaceshipStream from "../assets/spaceship-stream.svg"
 import spaceshipCabine from "../assets/spaceship-cabine.svg"
-import welcomeTabs from "../assets/welcome-tabs.json" */
-
-import { Routes, Route, Link } from "react-router-dom"
-import WelcomeLogin from "./WelcomeLogin"
+import welcomeTabs from "../assets/welcome-tabs.json"
 
 export default function Welcome() {
     const [underlineLeft, setUnderlineLeft] = useState("tvorba")
@@ -45,7 +43,7 @@ export default function Welcome() {
                             <div className="equal-flex">
                                 <TextInput type="email" placeholder="Email"/>
                                 <TextInput type="text" placeholder="Password"/>
-                                <div className="right-middle-flex"><p>Don’t have account? <span className="bold">Register there</span> </p><h4>Login</h4></div>
+                                <div className="right-middle-flex"><p>Don’t have account? <span><Link className="bold" to="/registration">Register there</Link></span> </p><h4>Login</h4></div>
                             </div>
                         </div>
                         <div className="representative-frame">
@@ -66,8 +64,4 @@ export default function Welcome() {
             </main>
         </>
     )
-}
-
-function Welcome() {
-
 }

@@ -36,6 +36,8 @@ $error: #FA0400;
 body {
     background: url("./assets/background.png") no-repeat;
     background-size: cover;
+    min-height: 100vh;
+    background-position: center;
 }
 
 .body-layout {

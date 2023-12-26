@@ -11,6 +11,8 @@ import welcomeTabs from "../assets/welcome-tabs.json"
 
 export default function Welcome() {
     const [underlineLeft, setUnderlineLeft] = useState("tvorba")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const robotOptions = {
         animationData: robotAnimation,
@@ -41,9 +43,9 @@ export default function Welcome() {
                         <div className="login">
                             <h1>Appandos</h1>
                             <div className="equal-flex">
-                                <TextInput type="email" placeholder="Email"/>
-                                <TextInput type="text" placeholder="Password"/>
-                                <div className="right-middle-flex"><p>Don’t have account? <span><Link className="bold" to="/registration">Register there</Link></span> </p><h4>Login</h4></div>
+                                <TextInput type="email" placeholder="Email" setterFunction={setEmail}/>
+                                <TextInput type="password" placeholder="Password" setterFunction={setPassword}/>
+                                <div className="right-middle-flex"><p>Don’t have account ? <span><Link className="bold" to="/registration">Register there</Link></span></p><h4>Login</h4></div>
                             </div>
                         </div>
                         <div className="representative-frame">

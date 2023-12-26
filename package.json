@@ -4,7 +4,8 @@
   "description": "MERN chat app",
   "main": "backend/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/damian127721/Project-X/issues"
   },
-  "homepage": "https://github.com/damian127721/Project-X#readme"
+  "homepage": "https://github.com/damian127721/Project-X#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^8.0.3",
+    "nodemon": "^3.0.2"
+  }
 }

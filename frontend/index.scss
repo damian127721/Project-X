@@ -11,7 +11,7 @@ $h6: 17px;
 $regular: 14px;
 
 $headings-family: 'Ubuntu', sans-serif;
-$regular-text-family: 'Ubuntu', sans-serif;
+$regular-text-family: 'Roboto', sans-serif;
 
 $black: #011222;
 $black-75: #404D59;
@@ -38,6 +38,7 @@ body {
     background-size: cover;
     min-height: 100vh;
     background-position: center;
+    color: $black-5;
 }
 
 .body-layout {
@@ -48,35 +49,23 @@ img {
     display: block;
 }
 
-input {
-    border-style: none;
-}
-
-
-
-p {
-    color: $black-5;
-}
-
 p {
     font-family: $regular-text-family;
     font-size: $regular;
 }
 
 a {
+    color: $black-5;
     text-decoration: none;
 }
 
 h1, h2, h4, a {
-    color: $black-5;
     font-family: $headings-family;
     font-weight: 500;
 }
 
 li, h5 {
-    color: $black-5;
     font-family: $headings-family;
-
 }
 
 h1 {
@@ -98,6 +87,7 @@ h5 {
 
 input {
     outline: none;
+    border-style: solid;
     display: block;
 }
 
@@ -133,10 +123,37 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    .right-middle-flex {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        align-self: flex-end;
+    }
+
+    p {
+        margin-right: 24px;
+    }
 }
 
 .bold {
     font-weight: bolder;
+}
+
+.app-info-center {
+    width: fit-content;
+    margin: 160px auto 0 auto;
+    h2 {
+        text-align: center;
+        margin-bottom: 64px;
+    }
+}
+
+.blue-box {
+    background-color: $primary;
+    border: 2px solid $secondary;
+    border-radius: 20px;
+    padding: 40px 32px;
 }
 
 /* WELCOME PAGE */
@@ -208,21 +225,8 @@ input {
             margin-bottom: 80px;
         }
         .equal-flex {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
             height: 215px;
-
-            .right-middle-flex {
-                display: flex;
-                justify-content: right;
-                align-items: center;
-                align-self: flex-end;
-            }
-
-            p {
-                margin-right: 24px;
-            }
         }
     }
     .representative-frame {
@@ -242,6 +246,7 @@ input {
     padding: 80px 0 96px 0;
     margin-top: 400px;
     background-color: $tertiary;
+    height: 100%;
     
     ul {
         margin: 40px 0 64px 0;
@@ -280,5 +285,13 @@ input {
         text-align: center;
         width: 340px;
         height: 160px;
+    }
+}
+
+/* REGISTRATION PAGE */
+
+.registration {
+    .equal-flex {
+        gap: 40px;
     }
 }

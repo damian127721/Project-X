@@ -103,6 +103,12 @@ input {
 .equal-flex p {
   margin-right: 24px;
 }
+.equal-flex .non-visual-button {
+  background-color: transparent;
+  border: none;
+  color: #F2F3F4;
+  cursor: pointer;
+}
 
 .bold {
   font-weight: bolder;

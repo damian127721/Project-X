@@ -134,6 +134,13 @@ input {
     p {
         margin-right: 24px;
     }
+
+    .non-visual-button {
+        background-color: transparent;
+        border: none;
+        color: $black-5;
+        cursor: pointer;
+    }
 }
 
 .bold {

@@ -7,14 +7,14 @@ export default function NavList({list}) {
             <nav>
             <ul>
             {list.map(item => {
-                return (item.side === "left") ? <li><Link to={item.path}>{item.name}</Link></li> : <></>
+                return (item.side === "left") ? <li key={item.path}><Link to={item.path}>{item.name}</Link></li> : <></>
             })}
             </ul>
             </nav>
             <nav>
             <ul>
             {list.map(item => {
-                return (item.side === "right") ? <li><Link to={item.path}>{item.name}</Link></li> : <></>
+                return (item.side === "right") ? <li key={item.path}><Link to={item.path}>{item.name}</Link></li> : <></>
             })}
             </ul>
             </nav>

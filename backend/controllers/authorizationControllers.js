@@ -24,6 +24,7 @@ module.exports.registerController = asyncHandler(async (req, res) => {
             _id: user._id,
             email: user.email,
             username: user.username,
+            pic: user.pic,
             token: generateToken(user._id)
         })
     } else {
@@ -47,6 +48,7 @@ module.exports.loginController = asyncHandler(async (req, res) => {
             _id: user._id,
             email: user.email,
             username: user.username,
+            pic: user.pic,
             token: generateToken(user._id)
         })
     } else {

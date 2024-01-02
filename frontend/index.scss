@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Signika+Negative:wght@400;600&family=Ubuntu:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap');
 
 /* PROMĚNNÉ */
 
@@ -43,6 +43,7 @@ body {
 
 .body-layout {
     margin: 40px 80px 0 80px;
+    
 }
 
 img {
@@ -65,6 +66,7 @@ h1, h2, h4, h6, a {
 }
 
 li, h5 {
+    font-weight: 400;
     font-family: $headings-family;
 }
 
@@ -123,6 +125,7 @@ input {
     }
 }
 
+
 .equal-flex {
     display: flex;
     flex-direction: column;
@@ -160,11 +163,33 @@ input {
     }
 }
 
+.body-layout {
+    .app-info-center {
+        margin: 56px auto 0 auto;
+    }
+}
+
 .blue-box {
     background-color: $primary;
     border: 2px solid $secondary;
     border-radius: 20px;
     padding: 40px 32px;
+    h5 {
+        margin-bottom: 32px;
+        text-align: center;
+        &:not(:first-child) {
+            margin-top: 32px;
+        }
+    }
+    h6 {
+        margin-bottom: 16px;
+    }
+    p {
+        max-width: 640px;
+    }
+    address {
+        text-align: center;
+    }
 }
 
 .error-box {
@@ -195,11 +220,32 @@ input {
     }
 }
 
+.icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    .icon path{
+        /* There will be some pseudo classes or classes for states */
+    }
+}
+
+.profile-pic {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 /* WELCOME PAGE */
 
 .nav-list {
     display: flex;
     justify-content: space-between;
+    ul {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+    }
     li {
         font-size: $h6;
         list-style-type: none;
@@ -334,3 +380,6 @@ input {
         gap: 40px;
     }
 }
+
+/* HOME PAGE */
+

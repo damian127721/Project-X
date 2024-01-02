@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import {useLottie} from "lottie-react"
@@ -11,6 +11,7 @@ import spaceshipStream from "../assets/spaceship-stream.svg"
 import spaceshipCabine from "../assets/spaceship-cabine.svg"
 import welcomeTabs from "../assets/welcome-tabs.json"
 import CustomError from "../components/Error"
+import { UserContext } from "./UserStatusProvider"
 
 export default function Welcome() {
     const [underlineLeft, setUnderlineLeft] = useState("tvorba")
@@ -19,6 +20,9 @@ export default function Welcome() {
     const [checkedInputs, setCheckedInputs] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+
+    const userStatus = useContext(UserContext)
+
     const navigate = useNavigate()
 
     const robotOptions = {
@@ -46,6 +50,7 @@ export default function Welcome() {
         }
 
         try {
+            setLoading(true)
             const res = await axios.post("http://localhost:5000/api/user/login", {email, password}, {
                 headers: {
                     "Content-Type": "application/json"
@@ -53,6 +58,7 @@ export default function Welcome() {
             })
 
             localStorage.setItem("user", JSON.stringify(res.data))
+            userStatus.setUser(res.data)
             navigate("/home")
         } catch(err) {
             if (!error) {
@@ -62,6 +68,7 @@ export default function Welcome() {
                 }, 3000)
             }
         }
+        setLoading(false)
     }
 
     return (
@@ -70,7 +77,7 @@ export default function Welcome() {
             <div className="body-layout">
                 <header>
                     <NavList list={[{
-                        path: "/home",
+                        path: "/informations",
                         name: "Informations",
                         side: "right"
                     }]}></NavList>
@@ -83,7 +90,7 @@ export default function Welcome() {
                             <h1>Appandos</h1>
                             <div className="equal-flex">
                                 <TextInput error={checkedInputs && email===""} type="email" placeholder="Email" setterFunction={setEmail}/>
-                                <TextInput error={checkedInputs && email===""} state={checkedInputs && password === "" ? "error" : ""} type="password" placeholder="Password" setterFunction={setPassword}/>
+                                <TextInput error={checkedInputs && password===""} state={checkedInputs && password === "" ? "error" : ""} type="password" placeholder="Password" setterFunction={setPassword}/>
                                 <div className="right-middle-flex"><p>Don’t have account ? <span><Link className="bold" to="/registration">Register there</Link></span></p><button className="non-visual-button" onClick={(e) => submitHandler(e)}><h4>Login</h4></button></div>
                             </div>
                         </div>

@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import TextInput from "../components/TextInput"
 import { Link } from "react-router-dom"
 import CustomError from "../components/Error"
 import { useNavigate } from "react-router-dom"
+import { UserContext } from "./UserStatusProvider"
 
 export default function Registration() {
     const [email, setEmail] = useState("")
@@ -11,6 +12,8 @@ export default function Registration() {
     const [loading, setLoading] = useState(false)
     const [checkedInputs, setCheckedInputs] = useState(false)
     const [error, setError] = useState("")
+
+    const userStatus = useContext(UserContext)
 
     const navigate = useNavigate()
 
@@ -49,6 +52,7 @@ export default function Registration() {
             }
             
             localStorage.setItem("user", JSON.stringify(data))
+            userStatus.setUser(data)
             navigate("/home", {replace: true})
         } catch(err) {
             console.log(err)

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Signika+Negative:wght@400;600&family=Ubuntu:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
 /* PROMĚNNÉ */
 /* RESET and COMMON ELEMENTS */
 *, *::before, *::after, :root, body {
@@ -40,6 +40,7 @@ h1, h2, h4, h6, a {
 }
 
 li, h5 {
+  font-weight: 400;
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -127,11 +128,31 @@ input {
   margin-bottom: 64px;
 }
 
+.body-layout .app-info-center {
+  margin: 56px auto 0 auto;
+}
+
 .blue-box {
   background-color: #055CAC;
   border: 2px solid #08EAF8;
   border-radius: 20px;
   padding: 40px 32px;
+}
+.blue-box h5 {
+  margin-bottom: 32px;
+  text-align: center;
+}
+.blue-box h5:not(:first-child) {
+  margin-top: 32px;
+}
+.blue-box h6 {
+  margin-bottom: 16px;
+}
+.blue-box p {
+  max-width: 640px;
+}
+.blue-box address {
+  text-align: center;
 }
 
 .error-box {
@@ -160,10 +181,31 @@ input {
   }
 }
 
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.icon-button .icon path {
+  /* There will be some pseudo classes or classes for states */
+}
+
+.profile-pic {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 /* WELCOME PAGE */
 .nav-list {
   display: flex;
   justify-content: space-between;
+}
+.nav-list ul {
+  display: flex;
+  align-items: center;
+  gap: 36px;
 }
 .nav-list li {
   font-size: 17px;
@@ -282,3 +324,5 @@ input {
 .registration .equal-flex {
   gap: 40px;
 }
+
+/* HOME PAGE */

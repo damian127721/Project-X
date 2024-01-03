@@ -1,5 +1,5 @@
 import React from "react"
 
-export default function ProfileIcon({profilePic}) {
-    return <img src={profilePic} className="profile-pic"></img>
+export default function ProfileIcon({profilePic, handleFunction}) {
+    return <img src={profilePic} className="profile-pic" onClick={handleFunction}></img>
 }

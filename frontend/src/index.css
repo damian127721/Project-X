@@ -70,6 +70,10 @@ input {
   display: block;
 }
 
+li {
+  list-style-type: none;
+}
+
 /* REUSABLE TOOLS */
 .text-input {
   font-family: "Roboto", sans-serif;
@@ -181,20 +185,8 @@ input {
   }
 }
 
-.icon-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-.icon-button .icon path {
-  /* There will be some pseudo classes or classes for states */
-}
-
-.profile-pic {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  cursor: pointer;
+.description {
+  color: #BFC4C8;
 }
 
 /* WELCOME PAGE */
@@ -209,7 +201,6 @@ input {
 }
 .nav-list li {
   font-size: 17px;
-  list-style-type: none;
 }
 
 .welcome-front {
@@ -326,3 +317,72 @@ input {
 }
 
 /* HOME PAGE */
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.icon-button .icon path {
+  stroke: white;
+}
+.icon-button.opened .icon path {
+  stroke: #08EAF8;
+}
+.icon-button:hover:not(.opened) .icon path {
+  stroke: #BFC4C8;
+}
+
+.profile-pic {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.side-flex {
+  position: absolute;
+  top: 132px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.blue-side-box {
+  padding: 16px 24px;
+  background-color: #055CAC;
+  border-radius: 0 10px 10px 0;
+  line-height: 25px;
+  width: 320px;
+}
+.blue-side-box li {
+  font-size: 17px;
+  font-weight: 500;
+}
+.blue-side-box .people:not(:first-child) {
+  margin-top: 40px;
+}
+.blue-side-box .people li {
+  display: flex;
+  justify-content: space-between;
+}
+.blue-side-box .people .accept {
+  display: flex;
+  gap: 16px;
+}
+.blue-side-box .people .accept svg {
+  height: 16px;
+  width: 16px;
+}
+.blue-side-box .people .accept path {
+  stroke: white;
+}
+.blue-side-box .people .accept .cross path {
+  fill: white;
+}
+.blue-side-box .people .accept .check path {
+  stroke-width: 3px;
+}
+.blue-side-box .people .description {
+  margin-bottom: 8px;
+}

@@ -10,17 +10,17 @@ export default function HomeNav({menuOpened, notifyOpened, peopleOpened, activit
             <li><Link to="/home">Home</Link></li>
         </ul>}
         {notifyOpened && <ul className="blue-side-box">
-            {activity?.groups.map(group => <li>Some activity in group {group.name}</li>)}
-            {activity?.users.map(user => <li>New message from {user.name}</li>)}
+            {activity?.groups.map(group => <li><button className="non-visual-button">Some activity in group {group.name}</button></li>)}
+            {activity?.users.map(user => <li><button className="non-visual-button">New message from {user.name}</button></li>)}
         </ul>}
         {peopleOpened && <ul className="blue-side-box">
             <div className="people">
                 <li className="description">[users]</li>
-                {people?.users.map(user => <li>{user.name}</li>)}    
+                {people?.users.map(user => <li>{user.name}<div className="accept"><button className="check icon-button"><Check /></button><button className="cross icon-button"><Cross /></button></div></li>)}  
             </div>
             <div className="people">
                 <li className="description">[groups]</li>
-                {people?.groups.map(group => <li>{group.name}<div className="accept"><span className="check"><Check /></span><span className="cross"><Cross /></span></div></li>)}   
+                {people?.groups.map(group => <li>{group.name}<div className="accept"><button className="check icon-button"><Check /></button><button className="cross icon-button"><Cross /></button></div></li>)}   
             </div>
         </ul>}
     </nav>

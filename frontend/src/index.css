@@ -85,6 +85,9 @@ li {
   border-radius: 10px;
   padding: 16px 24px;
 }
+.text-input::placeholder {
+  color: #BFC4C8;
+}
 .text-input:focus {
   border-color: #08EAF8;
 }
@@ -112,7 +115,8 @@ li {
 .equal-flex p {
   margin-right: 24px;
 }
-.equal-flex .non-visual-button {
+
+.non-visual-button {
   background-color: transparent;
   border: none;
   color: #F2F3F4;
@@ -323,7 +327,7 @@ li {
   cursor: pointer;
 }
 .icon-button .icon path {
-  stroke: white;
+  stroke: #F2F3F4;
 }
 .icon-button.opened .icon path {
   stroke: #08EAF8;
@@ -336,6 +340,7 @@ li {
   width: 64px;
   height: 64px;
   border-radius: 50%;
+  user-select: none;
   cursor: pointer;
 }
 
@@ -348,16 +353,25 @@ li {
   gap: 24px;
 }
 
-.blue-side-box {
+.profile-blue-side-box, .blue-side-box {
+  z-index: 1;
   padding: 16px 24px;
   background-color: #055CAC;
-  border-radius: 0 10px 10px 0;
   line-height: 25px;
   width: 320px;
 }
-.blue-side-box li {
+.profile-blue-side-box li, .blue-side-box li {
   font-size: 17px;
   font-weight: 500;
+}
+.profile-blue-side-box .non-visual-button, .blue-side-box .non-visual-button {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.blue-side-box {
+  border-radius: 0 10px 10px 0;
 }
 .blue-side-box .people:not(:first-child) {
   margin-top: 40px;
@@ -375,14 +389,52 @@ li {
   width: 16px;
 }
 .blue-side-box .people .accept path {
-  stroke: white;
+  stroke: #F2F3F4;
 }
 .blue-side-box .people .accept .cross path {
-  fill: white;
+  fill: #F2F3F4;
+}
+.blue-side-box .people .accept .cross:hover path {
+  fill: #BFC4C8;
 }
 .blue-side-box .people .accept .check path {
   stroke-width: 3px;
 }
+.blue-side-box .people .accept .check:hover path {
+  stroke: #BFC4C8;
+}
 .blue-side-box .people .description {
   margin-bottom: 8px;
+}
+
+.profile-blue-side-box {
+  border-radius: 10px;
+  position: absolute;
+  top: 132px;
+  right: 80px;
+}
+
+.search-bar {
+  background-color: #D9DBDE;
+  border: none;
+  border-radius: 25px;
+  padding: 24px;
+  width: 480px;
+}
+.search-bar::placeholder {
+  color: #404D59;
+}
+
+.search-box {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.search-icon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-40%);
 }

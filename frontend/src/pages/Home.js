@@ -1,12 +1,15 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import NavList from "../components/NavList"
 import {MenuButton, PeopleButton, NotifyButton} from "../components/navElements/Buttons"
 import ProfileIcon from "../components/ProfileIcon"
 import { UserContext } from "./UserStatusProvider"
 import defaultProfileIcon from "../assets/icons/user.png"
 import HomeNav from "../components/HomeNav"
+import ProfileNav from "../components/ProfileNav"
+import {ReactComponent as SearchIcon} from "../assets/icons/search.svg"
 
 export default function Home() {
+    /* Tady bude state pro vyhledávání */
     const userStatus = useContext(UserContext)
 
     const [windowsOpened, setWindowsOpened] = useState({
@@ -21,9 +24,30 @@ export default function Home() {
             ...prevWindowsOpened,
             [window]: !prevWindowsOpened[window]
         }))
-        
     }
-    console.log(windowsOpened)
+
+    const profileMenuHandleFunction = (e) => {
+        if (e.target.tagName == "BODY" && windowsOpened.profile) {
+            setWindowsOpened(prevWindowsOpened => ({
+                ...prevWindowsOpened,
+                profile: false
+            }))
+            console.log("prvni")
+        } else if (e.target.classList[0] === "profile-pic") {
+            setWindowsOpened(prevWindowsOpened => ({
+                ...prevWindowsOpened,
+                profile: !prevWindowsOpened.profile
+            }))
+        }
+    }
+
+    useEffect(() => {
+        document.body.addEventListener("click", profileMenuHandleFunction)
+        return () => {
+            document.body.removeEventListener("click", profileMenuHandleFunction)
+        }
+    }, [windowsOpened])
+
     return (<>
         <div className="body-layout">
             <NavList list={[{
@@ -43,7 +67,7 @@ export default function Home() {
                 button: true
             }, {
                 path: "profile",
-                name: <ProfileIcon handleFunction={() => windowsHandleFunction("profile")} profilePic={userStatus.user.pic ? userStatus.user.pic : defaultProfileIcon} />,
+                name: <ProfileIcon profilePic={userStatus.user.pic ? userStatus.user.pic : defaultProfileIcon} />,
                 side: "right",
                 button: true
             }]}/>
@@ -60,6 +84,10 @@ export default function Home() {
                 groups: [{name: "hospoda"}, {name: "piča D"}]
             }}
             />
+            <ProfileNav 
+                profileOpened={windowsOpened.profile}
+            />
+            <div className="search-box"><input type="text" placeholder="Search for people..." className="search-bar" /><span className="search-icon"><SearchIcon/></span></div>
         </div>
     </>)
 }

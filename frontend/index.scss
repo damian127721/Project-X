@@ -43,7 +43,6 @@ body {
 
 .body-layout {
     margin: 40px 80px 0 80px;
-    
 }
 
 img {
@@ -113,6 +112,10 @@ li {
     border-radius: 10px;
     padding: 16px 24px;
 
+    &::placeholder {
+        color: $black-25;
+    }
+
     &:focus {
         border-color: $secondary;
     }
@@ -145,13 +148,13 @@ li {
     p {
         margin-right: 24px;
     }
+}
 
-    .non-visual-button {
-        background-color: transparent;
-        border: none;
-        color: $black-5;
-        cursor: pointer;
-    }
+.non-visual-button {
+    background-color: transparent;
+    border: none;
+    color: $black-5;
+    cursor: pointer;
 }
 
 .bold {
@@ -379,7 +382,7 @@ li {
     border: none;
     cursor: pointer;
     .icon path {
-        stroke: white;
+        stroke: $black-5;
     }
     &.opened {
         .icon path{
@@ -397,6 +400,7 @@ li {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    user-select: none;
     cursor: pointer;
 }
 
@@ -409,16 +413,25 @@ li {
     gap: 24px;
 }
 
-.blue-side-box {
+.profile-blue-side-box, .blue-side-box {
+    z-index: 1;
     padding: 16px 24px;
     background-color: $primary;
-    border-radius: 0 10px 10px 0;
     line-height: 25px;
     width: 320px;
     li {
         font-size: $h6;
         font-weight: 500;
     }
+    .non-visual-button {
+        font-family: $headings-family;
+        font-size: $h6;
+        font-weight: 500;
+    }
+}
+
+.blue-side-box {
+    border-radius: 0 10px 10px 0;
     .people {
         &:not(:first-child) {
             margin-top: 40px;
@@ -439,17 +452,29 @@ li {
             }
 
             path {
-                stroke: white;
+                stroke: $black-5;
             }
             
             .cross {
                 path {
-                    fill: white;
+                    fill: $black-5;
+                }
+                &:hover {
+                    path {
+                        fill: $black-25;
+                    }
                 }
             }
 
-            .check path {
-                stroke-width: 3px;
+            .check {
+                path {
+                    stroke-width: 3px;
+                }
+                &:hover {
+                    path {
+                        stroke: $black-25;
+                    }
+                }
             }
         }
 
@@ -459,3 +484,35 @@ li {
     }
 }
 
+.profile-blue-side-box {
+    border-radius: 10px;
+    position: absolute;
+    top: 132px;
+    right: 80px;
+}
+
+.search-bar {
+    background-color: $black-15;
+    border: none;
+    border-radius: 25px;
+    padding: 24px;
+    width: 480px;
+
+    &::placeholder {
+        color: $black-75;
+    }
+}
+
+.search-box {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.search-icon {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-40%);
+}

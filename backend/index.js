@@ -1,9 +1,9 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const cors = require("cors")
-const authMiddleware = require("./middlewares/authMiddleware")
-const {errorCustom} = require("./middlewares/errorMiddlewares")
+const {errorCustom, notFound} = require("./middlewares/errorMiddlewares")
 
+const featureRoutes = require("./routes/featureRoutes")
 const authorizationRoutes = require("./routes/authorizationRoutes")
 const { dbConnect } = require("./database")
 
@@ -16,7 +16,9 @@ app.use(express.json())
 app.use(cors({origin: "http://localhost:3000"}))
 
 app.use("/api/user", authorizationRoutes)
+app.use("/api/feature", featureRoutes)
 
+app.use(notFound)
 app.use(errorCustom)
 
 app.listen(process.env.PORT, () => {

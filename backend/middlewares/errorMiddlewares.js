@@ -4,9 +4,13 @@ const errorCustom = (err, req, res, next) => {
     }
 
     res.json({
-        message: err.message,
-        stack: err.stack
+        message: err.message
     })
 }
 
-module.exports = {errorCustom}
+const notFound = (req, res, next) => {
+    res.status(404)
+    next(new Error("Not found"))
+}
+
+module.exports = {errorCustom, notFound}

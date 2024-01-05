@@ -9,7 +9,7 @@ import ProfileNav from "../components/ProfileNav"
 import {ReactComponent as SearchIcon} from "../assets/icons/search.svg"
 
 export default function Home() {
-    /* Tady bude state pro vyhledávání */
+    const [searchValue, setSearchValue] = useState("")
     const userStatus = useContext(UserContext)
 
     const [windowsOpened, setWindowsOpened] = useState({
@@ -18,6 +18,11 @@ export default function Home() {
         notify: false,
         profile: false,
     })
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        console.log("test")
+    }
 
     const windowsHandleFunction = (window) => {
         setWindowsOpened(prevWindowsOpened => ({
@@ -87,7 +92,13 @@ export default function Home() {
             <ProfileNav 
                 profileOpened={windowsOpened.profile}
             />
-            <div className="search-box"><input type="text" placeholder="Search for people..." className="search-bar" /><span className="search-icon"><SearchIcon/></span></div>
+            <form onSubmit={submitHandler} className="search-box"><input onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Search for people..." className="search-bar" /><button type="submit" className="search-icon non-visual-button"><SearchIcon/></button>
+                <ul className="search-list">
+                    <li>test</li>
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </form>
         </div>
     </>)
 }

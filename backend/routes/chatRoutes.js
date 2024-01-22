@@ -22,15 +22,13 @@ router.post(
       const chat = await Chat.create({ name, isGroupChat, users });
       res.json(chat);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   })
 );
 
 router.get("/getChats", authMiddleware, (req, res) => {
-  const { user } = req.body
-  
-  try {}
-})
+  const { user } = req.body;
+});
 
 module.exports = router;

@@ -32,4 +32,26 @@ router.get(
   })
 );
 
+router.get(
+  "/searchSpecific",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+      throw new Error("No email provided");
+    }
+
+    try {
+      const user = await User.findOne({ email }).select("-password");
+      if (!user) {
+        throw new Error("Couldn't find");
+      }
+      res.json(user);
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+);
+
 module.exports = router;

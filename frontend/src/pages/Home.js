@@ -12,6 +12,7 @@ import HomeNav from "../components/HomeNav";
 import ProfileNav from "../components/ProfileNav";
 import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
@@ -52,21 +53,31 @@ export default function Home() {
   };
 
   const closeHandleFunction = (e) => {
-    if (e.target.tagName == "BODY" && windowsOpened.profile) {
-      setWindowsOpened((prevWindowsOpened) => ({
-        ...prevWindowsOpened,
-        profile: false,
-      }));
+    if (e.target.tagName === "BODY") {
+      if (windowsOpened.profile) {
+        setWindowsOpened((prevWindowsOpened) => ({
+          ...prevWindowsOpened,
+          profile: false,
+        }));
+      }
+
+      if (foundPeople.length > 0) {
+        setFoundPeople([]);
+      }
+
+      if (windowsOpened.people || windowsOpened.notify || windowsOpened.menu) {
+        setWindowsOpened((prevWindowsOpened) => ({
+          ...prevWindowsOpened,
+          menu: false,
+          people: false,
+          notify: false,
+        }));
+      }
     } else if (e.target.classList[0] === "profile-pic") {
       setWindowsOpened((prevWindowsOpened) => ({
         ...prevWindowsOpened,
         profile: !prevWindowsOpened.profile,
       }));
-    }
-
-    if (e.target.tagName == "BODY" && foundPeople.length > 0) {
-      console.log("test");
-      setFoundPeople([]);
     }
   };
 
@@ -159,7 +170,15 @@ export default function Home() {
             <ul className="search-list">
               {foundPeople.map((elem) => (
                 <li key={elem.email}>
-                  <button className="non-visual-button">{elem.username}</button>
+                  <button className="non-visual-button">
+                    <Link
+                      to={`/home/profile/${elem.username}`}
+                      className="non-visual-button"
+                      state={{ user: elem }}
+                    >
+                      {elem.username}
+                    </Link>
+                  </button>
                 </li>
               ))}
             </ul>

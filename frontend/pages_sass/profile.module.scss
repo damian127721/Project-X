@@ -1,0 +1,44 @@
+@import "pages_sass/variables";
+
+.profile_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  margin: auto;
+
+  .profile_picture {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  .user_interact {
+    align-items: center;
+    position: relative;
+
+    svg {
+      height: 48px;
+    }
+
+    .icon_box {
+      position: absolute;
+      right: -136px;
+      top: -16px;
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  textarea {
+    border: 2px solid $secondary;
+    border-radius: 20px;
+    background-color: transparent;
+    height: 240px;
+    width: 800px;
+    padding: 24px;
+  }
+}

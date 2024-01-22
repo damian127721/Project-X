@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
+
+/* PROMĚNNÉ */
+
+$h1: 95px;
+$h2: 68px;
+$h3: 48px;
+$h4: 34px;
+$h5: 24px;
+$h6: 17px;
+$regular: 14px;
+
+$headings-family: "Ubuntu", sans-serif;
+$regular-text-family: "Roboto", sans-serif;
+
+$black: #011222;
+$black-75: #404d59;
+$black-50: #808890;
+$black-25: #bfc4c8;
+$black-15: #d9dbde;
+$black-5: #f2f3f4;
+
+$primary: #055cac;
+$secondary: #08eaf8;
+$tertiary: #0b1a46;
+$error: #fa0400;
+
+@function makeOpacity($color, $opacity) {
+  @return rgba(red($color), green($color), blue($color), $opacity);
+}

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
+/* PROMĚNNÉ */
+.message-box {
+  display: flex;
+  gap: 32px;
+  width: 70%;
+  margin-bottom: 40px;
+  align-items: flex-end;
+}
+.message-box.user-message {
+  align-self: flex-end;
+}
+.message-box.next-same-user {
+  margin-bottom: 10px;
+}
+.message-box .message-icon {
+  height: 48px;
+  position: relative;
+}
+.message-box p {
+  min-height: 100%;
+}
+
+.all-messages {
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+  overflow-y: scroll;
+  overflow-x: visible;
+}
+.all-messages::-webkit-scrollbar {
+  width: 10px;
+}
+.all-messages::-webkit-scrollbar-thumb {
+  background: #055cac;
+}
+.all-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 92, 172, 0.8);
+}
+.all-messages::-webkit-scrollbar-corner {
+  display: none;
+}
+.all-messages .message-sender {
+  position: absolute;
+  bottom: -80px;
+  right: 0;
+  height: 48px;
+  width: clamp(200px, 70%, 640px);
+  border-radius: 25px;
+  background-color: #f2f3f4;
+  border: 2px solid #808890;
+  padding: 16px;
+}
+
+.all-messages-wrap {
+  position: relative;
+  margin: 104px auto 0 auto;
+  width: clamp(400px, 100%, 1200px);
+}

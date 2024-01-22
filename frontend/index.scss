@@ -1,29 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
-
-/* PROMĚNNÉ */
-
-$h1: 95px;
-$h2: 68px;
-$h3: 48px;
-$h4: 34px;
-$h5: 24px;
-$h6: 17px;
-$regular: 14px;
-
-$headings-family: "Ubuntu", sans-serif;
-$regular-text-family: "Roboto", sans-serif;
-
-$black: #011222;
-$black-75: #404d59;
-$black-50: #808890;
-$black-25: #bfc4c8;
-$black-15: #d9dbde;
-$black-5: #f2f3f4;
-
-$primary: #055cac;
-$secondary: #08eaf8;
-$tertiary: #0b1a46;
-$error: #fa0400;
+@import "pages_sass/variables";
 
 /* RESET and COMMON ELEMENTS */
 
@@ -38,15 +13,21 @@ body {
 }
 
 body {
+  color: $black-5;
+  min-height: 100vh;
+  background-color: $tertiary;
+}
+
+body .background-img {
   background: url("./assets/background.png") no-repeat;
   background-size: cover;
-  min-height: 100vh;
   background-position: center;
-  color: $black-5;
+  min-height: 100vh;
+  border-top: 1px solid transparent; /* MARGIN OVERFLOW, lepší vyřešit přesah nahoře */
 }
 
 .body-layout {
-  margin: 40px 80px 0 80px;
+  padding: 40px 80px 0 80px;
 }
 
 img {
@@ -106,6 +87,16 @@ input {
 
 li {
   list-style-type: none;
+}
+
+textarea {
+  color: $black-5;
+  font-family: $regular-text-family;
+  font-size: $regular;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 /* REUSABLE TOOLS */
@@ -236,6 +227,10 @@ li {
 
 .description {
   color: $black-25;
+}
+
+.not-allowed {
+  pointer-events: none;
 }
 
 /* WELCOME PAGE */
@@ -404,6 +399,17 @@ li {
       stroke: $black-25;
     }
   }
+
+  .icon.blue_theme path {
+    stroke: $primary;
+  }
+
+  &:hover {
+    .icon.blue_theme path {
+      stroke: $primary;
+      stroke-opacity: 0.9;
+    }
+  }
 }
 
 .profile-pic {
@@ -536,6 +542,7 @@ li {
   padding: 32px 24px;
   background-color: $black-15;
   border-radius: 25px;
+  box-shadow: 3px 5px 10px 5px makeOpacity($black-5, 0.15);
 
   li {
     text-indent: 8px;

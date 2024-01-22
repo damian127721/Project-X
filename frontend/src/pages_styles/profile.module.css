@@ -1,0 +1,40 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
+/* PROMĚNNÉ */
+.profile_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  margin: auto;
+}
+.profile_column .profile_picture {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  user-select: none;
+}
+.profile_column .user_interact {
+  align-items: center;
+  position: relative;
+}
+.profile_column .user_interact svg {
+  height: 48px;
+}
+.profile_column .user_interact .icon_box {
+  position: absolute;
+  right: -136px;
+  top: -16px;
+  display: flex;
+  gap: 8px;
+}
+.profile_column textarea {
+  border: 2px solid #08eaf8;
+  border-radius: 20px;
+  background-color: transparent;
+  height: 240px;
+  width: 800px;
+  padding: 24px;
+}

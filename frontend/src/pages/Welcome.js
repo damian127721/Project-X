@@ -102,12 +102,12 @@ export default function Welcome() {
                 alt="spaceship"
               />
             </div>
-            <div className="login">
+            <form className="login" onSubmit={(e) => submitHandler(e)}>
               <h1>Appandos</h1>
               <div className="equal-flex">
                 <TextInput
                   error={checkedInputs && email === ""}
-                  type="email"
+                  type="text" /*Pak by měl být email*/
                   placeholder="Email"
                   setterFunction={setEmail}
                 />
@@ -127,15 +127,12 @@ export default function Welcome() {
                       </Link>
                     </span>
                   </p>
-                  <button
-                    className="non-visual-button"
-                    onClick={(e) => submitHandler(e)}
-                  >
+                  <button className="non-visual-button" type="submit">
                     <h4>Login</h4>
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
             <div className="representative-frame">{Robot}</div>
           </div>
         </header>

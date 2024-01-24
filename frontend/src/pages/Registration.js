@@ -76,7 +76,7 @@ export default function Registration() {
         {error && <CustomError message={error} />}
         <h2>Registration</h2>
         <main className="blue-box">
-          <form className="equal-flex">
+          <form className="equal-flex" onSubmit={(e) => submitHandler(e)}>
             <TextInput
               error={checkedInputs && email === ""}
               type="email"
@@ -104,10 +104,7 @@ export default function Registration() {
                   </Link>
                 </span>
               </p>
-              <button
-                className="non-visual-button"
-                onClick={(e) => submitHandler(e)}
-              >
+              <button className="non-visual-button" type="submit">
                 <h4>Register</h4>
               </button>
             </div>

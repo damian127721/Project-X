@@ -5,8 +5,6 @@ const Message = require("../schemas/Message");
 const asyncHandler = require("express-async-handler");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-/* Musím udělat kontroler který vrátí všechny chaty které uživateli patří, jejich ids pak loadnu hned při startu*/
-
 router.post(
   "/createChat",
   authMiddleware,
@@ -16,10 +14,20 @@ router.post(
       throw new Error("Some properties are missing.");
     } else if (users.length < 2 || (isGroupChat && users.length < 3)) {
       throw new Error("Not enough users.");
+    } else if (!isGroupChat) {
+      try {
+        const chatExists = await Chat.findOne({ users });
+        if (chatExists) {
+          return res.status(400).json({ message: "The chat already exists." });
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
     }
 
     try {
       const chat = await Chat.create({ name, isGroupChat, users });
+
       res.json(chat);
     } catch (error) {
       throw new Error(error);
@@ -27,8 +35,41 @@ router.post(
   })
 );
 
-router.get("/getChats", authMiddleware, (req, res) => {
-  const { user } = req.body;
-});
+/* router.get(
+  "/getChats",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    const { user } = req.body;
+
+    try {
+      const userChats = await Chat.find({ users: { $in: [user] } });
+      res.json(userChats);
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+); */
+
+router.get(
+  "/privateChatExists",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    const { user } = req.body;
+    const { contactId } = req.query;
+
+    if (!contactId) {
+      throw new Error("A user is missing.");
+    }
+
+    try {
+      const userChat = await Chat.findOne({
+        users: [user, contactId],
+      }).populate("messages");
+      res.json(userChat);
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+);
 
 module.exports = router;

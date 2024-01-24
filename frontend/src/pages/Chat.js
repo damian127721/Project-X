@@ -12,10 +12,12 @@ import defaultProfileIcon from "../assets/icons/user.png";
 import { UserContext } from "./UserStatusProvider";
 
 const Chat = () => {
-  const selectedUser = useLocation().state.selectedUser;
+  const { selectedUser, chat } = useLocation().state;
   const userState = useContext(UserContext);
   const [messageSenderValue, setMessageSenderValue] = useState("");
   const allMessages = useRef();
+
+  console.log(selectedUser, chat, userState);
 
   const [windowsOpened, setWindowsOpened] = useState({
     menu: false,
@@ -31,11 +33,31 @@ const Chat = () => {
     }));
   };
 
-  const sendMessage = (e) => {
-    if (e.key === "Enter") {
-      console.log(messageSenderValue);
-      setMessageSenderValue("");
+  const sendMessage = async (e) => {
+    if (e.key !== "Enter") {
+      return;
     }
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userState.user.token,
+        },
+        body: JSON.stringify({
+          text: messageSenderValue,
+          chatId: chat._id,
+        }),
+        method: "POST",
+      };
+      const res = await fetch(
+        "http://localhost:5000/api/message/sendMessage",
+        config
+      );
+
+      const data = res.json();
+      setMessageSenderValue("");
+    } catch (error) {}
   };
 
   const closeHandleFunction = (e) => {
@@ -62,63 +84,10 @@ const Chat = () => {
     allMessages.current.scrollTop = allMessages.current.scrollHeight;
   }, []);
 
-  const [messages, setMessages] = useState([
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "d",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "d",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "Damian127",
-      text: "Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "d",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "d",
-      text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam quis quam. Fusce suscipit libero eget elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus luctus egestas leo. Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-    {
-      sender: "d",
-      text: "Proin in tellus sit amet nibh dignissim sagittis.",
-    },
-  ]);
+  const [messages, setMessages] = useState([...chat.messages]);
 
   return (
-    <div className={"body-layout" + " " + styles["body-layout"]}>
+    <div className={"body-layout"}>
       <NavList
         list={[
           {

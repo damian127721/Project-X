@@ -24,6 +24,40 @@ export default function Profile() {
     }
   }, [user, searchedUser]);
 
+  const onOpenChat = async () => {
+    try {
+      let { data: chat } = await axios.get(
+        `http://localhost:5000/api/chat/privateChatExists?contactId=${searchedUser._id}`,
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
+      if (!chat) {
+        const { data } = await axios.post(
+          "http://localhost:5000/api/chat/createChat",
+          {
+            users: [user._id, selectedUser._id],
+            isGroupChat: false,
+          },
+          {
+            headers: {
+              Authorization: user.token,
+            },
+          }
+        );
+        chat = data;
+      }
+
+      navigate(`../chat/${selectedUser.username}`, {
+        state: { selectedUser: selectedUser, chat },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="body-layout">
       <NavList
@@ -47,14 +81,7 @@ export default function Profile() {
               <button className="icon-button">
                 <AddIcon className="icon blue_theme" />
               </button>
-              <button
-                className="icon-button"
-                onClick={() =>
-                  navigate(`../chat/${selectedUser.username}`, {
-                    state: { selectedUser: selectedUser },
-                  })
-                }
-              >
+              <button className="icon-button" onClick={onOpenChat}>
                 <LetterIcon className="icon blue_theme" />
               </button>
             </div>

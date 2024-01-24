@@ -6,6 +6,7 @@ const { errorCustom, notFound } = require("./middlewares/errorMiddlewares");
 const featureRoutes = require("./routes/featureRoutes");
 const authorizationRoutes = require("./routes/authorizationRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const { dbConnect } = require("./database");
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use("/api/user", authorizationRoutes);
 app.use("/api/feature", featureRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 
 app.use(notFound);
 app.use(errorCustom);

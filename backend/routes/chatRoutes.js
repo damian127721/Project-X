@@ -48,7 +48,7 @@ router.post(
       throw new Error(error);
     }
   })
-); */
+); */ console.log("test");
 
 router.get(
   "/privateChatExists",

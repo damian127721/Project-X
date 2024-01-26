@@ -147,12 +147,12 @@ export default function Home() {
           notifyOpened={windowsOpened.notify}
           peopleOpened={windowsOpened.people}
           activity={{
-            users: [{ name: "damian" }, { name: "kokot" }, { name: "piča" }],
-            groups: [{ name: "hospoda" }, { name: "piča D" }],
+            users: [{ name: "test" }, { name: "test" }, { name: "test" }],
+            groups: [{ name: "test" }, { name: "test" }],
           }}
           people={{
-            users: [{ name: "damian" }, { name: "kokot" }, { name: "piča" }],
-            groups: [{ name: "hospoda" }, { name: "piča D" }],
+            users: [{ name: "test" }, { name: "test" }, { name: "test" }],
+            groups: [{ name: "test" }, { name: "test" }],
           }}
         />
         <ProfileNav profileOpened={windowsOpened.profile} />

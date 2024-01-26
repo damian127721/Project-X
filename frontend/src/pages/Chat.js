@@ -18,8 +18,6 @@ const Chat = () => {
   const allMessages = useRef();
   const [messages, setMessages] = useState([...chat.messages]);
 
-  console.log(console.log(chat));
-
   const [windowsOpened, setWindowsOpened] = useState({
     menu: false,
     people: false,
@@ -132,12 +130,12 @@ const Chat = () => {
         notifyOpened={windowsOpened.notify}
         peopleOpened={windowsOpened.people}
         activity={{
-          users: [{ name: "damian" }, { name: "kokot" }, { name: "piča" }],
-          groups: [{ name: "hospoda" }, { name: "piča D" }],
+          users: [{ name: "test" }, { name: "test" }, { name: "test" }],
+          groups: [{ name: "test" }, { name: "test" }],
         }}
         people={{
-          users: [{ name: "damian" }, { name: "kokot" }, { name: "piča" }],
-          groups: [{ name: "hospoda" }, { name: "piča D" }],
+          users: [{ name: "test" }, { name: "test" }, { name: "test" }],
+          groups: [{ name: "test" }, { name: "test" }],
         }}
       />
       <div className={styles["all-messages-wrap"]}>

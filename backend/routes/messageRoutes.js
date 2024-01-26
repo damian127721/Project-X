@@ -21,7 +21,7 @@ router.post(
           },
         }
       );
-      res.json({ sendSuccessfull: true });
+      res.json(message);
     } catch (error) {
       throw new Error(error);
     }
@@ -34,9 +34,8 @@ router.get(
   asyncHandler(async (req, res) => {
     const { chatId } = req.query;
 
-    const chat = await Chat.find({ _id: chatId }).populate("messages");
-
-    res.json(chat);
+    const chat = await Chat.findOne({ _id: chatId }).populate("messages");
+    res.json(chat.messages);
   })
 );
 

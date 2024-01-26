@@ -16,8 +16,9 @@ const Chat = () => {
   const userState = useContext(UserContext);
   const [messageSenderValue, setMessageSenderValue] = useState("");
   const allMessages = useRef();
+  const [messages, setMessages] = useState([...chat.messages]);
 
-  console.log(selectedUser, chat, userState);
+  console.log(console.log(chat));
 
   const [windowsOpened, setWindowsOpened] = useState({
     menu: false,
@@ -55,7 +56,10 @@ const Chat = () => {
         config
       );
 
-      const data = res.json();
+      const message = await res.json();
+      setMessages((prevMessages) => {
+        return [...prevMessages, message];
+      });
       setMessageSenderValue("");
     } catch (error) {}
   };
@@ -83,8 +87,6 @@ const Chat = () => {
   useEffect(() => {
     allMessages.current.scrollTop = allMessages.current.scrollHeight;
   }, []);
-
-  const [messages, setMessages] = useState([...chat.messages]);
 
   return (
     <div className={"body-layout"}>

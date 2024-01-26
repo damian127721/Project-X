@@ -48,7 +48,7 @@ router.post(
       throw new Error(error);
     }
   })
-); */ console.log("test");
+); */
 
 router.get(
   "/privateChatExists",
@@ -63,7 +63,7 @@ router.get(
 
     try {
       const userChat = await Chat.findOne({
-        users: [user, contactId],
+        users: { $all: [user, contactId] },
       }).populate("messages");
       res.json(userChat);
     } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import NavList from "../components/NavList";
 import HomeLink from "../components/navElements/HomeLink";
 import { UserContext } from "./UserStatusProvider";
@@ -13,6 +13,7 @@ export default function Profile() {
   const { user } = useContext(UserContext);
   const searchedUser = useLocation().state?.user;
   const [selectedUser, setSelectedUser] = useState(null);
+  const [bio, setBio] = useState("");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -22,6 +23,38 @@ export default function Profile() {
       setSelectedUser(user);
     }
   }, [user, searchedUser]);
+
+  useEffect(() => {
+    setBio(selectedUser?.bio);
+  }, [selectedUser]);
+
+  const timeoutId = useRef();
+
+  const handleBioChange = (e) => {
+    const bioUpdated = e.target.value;
+    setBio(bioUpdated);
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+
+    timeoutId.current = setTimeout(async () => {
+      try {
+        await axios.post(
+          "http://localhost:5000/api/feature/updateBio",
+          { bio: bioUpdated },
+          {
+            headers: {
+              Authorization: user.token,
+            },
+          }
+        );
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...user, bio: bioUpdated })
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }, 1000);
+  };
 
   const onOpenChat = async () => {
     try {
@@ -37,7 +70,7 @@ export default function Profile() {
         const { data } = await axios.post(
           "http://localhost:5000/api/chat/createChat",
           {
-            users: [user._id, selectedUser._id],
+            users: [selectedUser._id],
             isGroupChat: false,
           },
           {
@@ -86,9 +119,12 @@ export default function Profile() {
             </div>
           )}
         </div>
-        <textarea className={searchedUser ? "not-allowed" : ""} />
-        {/* //TODO udělat úpravu BIA, takže i upravit model uživatele že bude mít
-        BIO */}
+        <textarea
+          onChange={handleBioChange}
+          value={bio}
+          className={searchedUser ? "not-allowed" : ""}
+        />
+        //TODO musím přidat labely a name pro inputy
       </div>
     </div>
   );

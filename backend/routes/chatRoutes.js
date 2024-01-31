@@ -9,7 +9,8 @@ router.post(
   "/createChat",
   authMiddleware,
   asyncHandler(async (req, res) => {
-    const { name, isGroupChat, users } = req.body;
+    const { name, isGroupChat, users, user } = req.body;
+    users.push(user._id);
     if ((isGroupChat && !name) || !users) {
       throw new Error("Some properties are missing.");
     } else if (users.length < 2 || (isGroupChat && users.length < 3)) {

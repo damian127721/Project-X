@@ -15,7 +15,6 @@ export default function Profile() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const navigate = useNavigate();
-
   useEffect(() => {
     if (searchedUser) {
       setSelectedUser(searchedUser);
@@ -76,7 +75,7 @@ export default function Profile() {
         />
         <div className={styles.user_interact}>
           <h3>{selectedUser?.username}</h3>
-          {searchedUser && (
+          {searchedUser && selectedUser?._id != user._id && (
             <div className={styles.icon_box}>
               <button className="icon-button">
                 <AddIcon className="icon blue_theme" />
@@ -88,6 +87,8 @@ export default function Profile() {
           )}
         </div>
         <textarea className={searchedUser ? "not-allowed" : ""} />
+        {/* //TODO udělat úpravu BIA, takže i upravit model uživatele že bude mít
+        BIO */}
       </div>
     </div>
   );

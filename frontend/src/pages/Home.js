@@ -53,7 +53,13 @@ export default function Home() {
   };
 
   const closeHandleFunction = (e) => {
-    if (e.target.tagName === "BODY") {
+    if (
+      !e.target.closest(".profile-pic") &&
+      !e.target.closest(".icon-button") &&
+      !e.target.closest(".blue-side-box") &&
+      !e.target.closest(".profile-blue-side-box") &&
+      !e.target.closest(".search-list")
+    ) {
       if (windowsOpened.profile) {
         setWindowsOpened((prevWindowsOpened) => ({
           ...prevWindowsOpened,

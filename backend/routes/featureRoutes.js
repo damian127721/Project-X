@@ -19,9 +19,14 @@ router.get(
 
     try {
       searchedUsers = await User.find({
-        $or: [
-          { email: { $regex: searchValue, $options: "i" } },
-          { username: { $regex: searchValue, $options: "i" } },
+        $and: [
+          { _id: { $ne: req.body.user } },
+          {
+            $or: [
+              { email: { $regex: searchValue, $options: "i" } },
+              { username: { $regex: searchValue, $options: "i" } },
+            ],
+          },
         ],
       }).select("-password");
     } catch {
@@ -48,6 +53,20 @@ router.get(
         throw new Error("Couldn't find");
       }
       res.json(user);
+    } catch (error) {
+      throw new Error(error);
+    }
+  })
+);
+
+router.post(
+  "/updateBio",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    const { user, bio } = req.body;
+    try {
+      await User.findOneAndUpdate({ _id: user._id }, { bio });
+      res.status(200).send();
     } catch (error) {
       throw new Error(error);
     }

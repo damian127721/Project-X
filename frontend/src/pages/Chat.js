@@ -10,13 +10,34 @@ import HomeNav from "../components/HomeNav";
 import { useLocation } from "react-router-dom";
 import defaultProfileIcon from "../assets/icons/user.png";
 import { UserContext } from "./UserStatusProvider";
+import axios from "axios";
 
 const Chat = () => {
   const { selectedUser, chat } = useLocation().state;
   const userState = useContext(UserContext);
   const [messageSenderValue, setMessageSenderValue] = useState("");
   const allMessages = useRef();
-  const [messages, setMessages] = useState([...chat.messages]);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/api/message/getChatMessages?chatId=${chat._id}`,
+          {
+            headers: {
+              Authorization: userState.user.token,
+            },
+          }
+        );
+        setMessages(data);
+      } catch (error) {
+        console.log("Error: " + error);
+      }
+    };
+
+    if (userState.user) fetchMessages();
+  }, [userState]);
 
   const [windowsOpened, setWindowsOpened] = useState({
     menu: false,
@@ -24,13 +45,6 @@ const Chat = () => {
     notify: false,
     profile: false,
   });
-
-  const windowsHandleFunction = (window) => {
-    setWindowsOpened((prevWindowsOpened) => ({
-      ...prevWindowsOpened,
-      [window]: !prevWindowsOpened[window],
-    }));
-  };
 
   const sendMessage = async (e) => {
     if (e.key !== "Enter") {
@@ -62,8 +76,18 @@ const Chat = () => {
     } catch (error) {}
   };
 
+  const windowsHandleFunction = (window) => {
+    setWindowsOpened((prevWindowsOpened) => ({
+      ...prevWindowsOpened,
+      [window]: !prevWindowsOpened[window],
+    }));
+  };
+
   const closeHandleFunction = (e) => {
-    if (!e.target.closest(".icon-button")) {
+    if (
+      !e.target.closest(".icon-button") &&
+      !e.target.closest(".blue-side-box")
+    ) {
       if (windowsOpened.people || windowsOpened.notify || windowsOpened.menu) {
         setWindowsOpened((prevWindowsOpened) => ({
           ...prevWindowsOpened,
@@ -84,7 +108,7 @@ const Chat = () => {
 
   useEffect(() => {
     allMessages.current.scrollTop = allMessages.current.scrollHeight;
-  }, []);
+  }, [messages]);
 
   return (
     <div className={"body-layout"}>

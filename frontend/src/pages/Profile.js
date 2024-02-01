@@ -124,7 +124,6 @@ export default function Profile() {
           value={bio}
           className={searchedUser ? "not-allowed" : ""}
         />
-        //TODO musím přidat labely a name pro inputy
       </div>
     </div>
   );

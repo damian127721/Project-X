@@ -116,7 +116,7 @@ const Chat = () => {
         list={[
           {
             path: "menu",
-            name: (
+            elem: (
               <MenuButton
                 handleFunction={() => windowsHandleFunction("menu")}
                 opened={windowsOpened.menu}
@@ -127,7 +127,7 @@ const Chat = () => {
           },
           {
             path: "notify",
-            name: (
+            elem: (
               <NotifyButton
                 handleFunction={() => windowsHandleFunction("notify")}
                 opened={windowsOpened.notify}
@@ -138,7 +138,7 @@ const Chat = () => {
           },
           {
             path: "people",
-            name: (
+            elem: (
               <PeopleButton
                 handleFunction={() => windowsHandleFunction("people")}
                 opened={windowsOpened.people}

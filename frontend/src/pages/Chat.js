@@ -59,6 +59,10 @@ const Chat = () => {
       return;
     }
 
+    if (messageSenderValue === "") {
+      return;
+    }
+
     try {
       const config = {
         headers: {
@@ -191,7 +195,7 @@ const Chat = () => {
                 {elem.sender !== userState.user.username && !isNextSameUser ? (
                   <img
                     src={
-                      selectedUser.pic
+                      selectedUser.pic.src
                         ? selectedUser.pic.src
                         : defaultProfileIcon
                     }

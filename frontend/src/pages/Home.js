@@ -137,8 +137,8 @@ export default function Home() {
               name: (
                 <ProfileIcon
                   profilePic={
-                    userStatus.user.pic
-                      ? userStatus.user.pic
+                    userStatus.user.pic?.src
+                      ? userStatus.user.pic?.src
                       : defaultProfileIcon
                   }
                 />

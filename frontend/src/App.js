@@ -6,6 +6,7 @@ import Informations from "./pages/Informations";
 import UserStatusProvider, { UserContext } from "./pages/UserStatusProvider";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<Welcome />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/informations" element={<Informations />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
           <Route path="/home">
             <Route index element={<Home />} />

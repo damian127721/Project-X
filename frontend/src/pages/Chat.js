@@ -20,6 +20,14 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    userState.socket.emit("join-room", chat._id);
+    userState.socket.on("message", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+      console.log("got message");
+    });
+  }, []);
+
+  useEffect(() => {
     const fetchMessages = async () => {
       try {
         const { data } = await axios.get(
@@ -72,6 +80,7 @@ const Chat = () => {
       setMessages((prevMessages) => {
         return [...prevMessages, message];
       });
+      userState.socket.emit("message", message, chat._id);
       setMessageSenderValue("");
     } catch (error) {}
   };
@@ -182,7 +191,9 @@ const Chat = () => {
                 {elem.sender !== userState.user.username && !isNextSameUser ? (
                   <img
                     src={
-                      selectedUser.pic ? selectedUser.pic : defaultProfileIcon
+                      selectedUser.pic
+                        ? selectedUser.pic.src
+                        : defaultProfileIcon
                     }
                     className={styles["message-icon"]}
                   />

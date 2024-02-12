@@ -25,6 +25,25 @@ app.use("/api/message", messageRoutes);
 app.use(notFound);
 app.use(errorCustom);
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log("server is running at port " + process.env.PORT);
+});
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(socket.id + " connected");
+
+  socket.on("disconnect", () => console.log(socket.id + " disconnected"));
+  socket.on("message", (message, room) => {
+    socket.to(room).emit("message", message);
+  });
+  socket.on("join-room", (room) => {
+    socket.join(room);
+    console.log(`User ${socket.id} joined room ${room}`);
+  });
 });

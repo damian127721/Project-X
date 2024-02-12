@@ -17,14 +17,26 @@ function buildChatStyles() {
     .pipe(dest("src/pages_styles"));
 }
 
+function buildSettingsStyles() {
+  return src("./pages_sass/settings.module.scss")
+    .pipe(sass())
+    .pipe(dest("src/pages_styles"));
+}
+
 function watchTask() {
   watch(
     [
       "index.scss",
       "./pages_sass/profile.module.scss",
       "./pages_sass/chat.module.scss",
+      "./pages_sass/settings.module.scss",
     ],
-    series(buildStyles, buildProfileStyles, buildChatStyles)
+    series(
+      buildStyles,
+      buildProfileStyles,
+      buildChatStyles,
+      buildSettingsStyles
+    )
   );
 }
 
@@ -32,5 +44,6 @@ exports.default = series(
   buildStyles,
   buildProfileStyles,
   buildChatStyles,
+  buildSettingsStyles,
   watchTask
 );

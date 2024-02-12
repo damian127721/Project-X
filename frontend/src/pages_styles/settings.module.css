@@ -1,0 +1,28 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@400;500&display=swap");
+/* PROMĚNNÉ */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.button {
+  background-color: #0b1a46;
+  width: 124px;
+  height: 48px;
+  border-radius: 10px;
+  border: 2px solid #f2f3f4;
+  font-size: 17px;
+  color: #f2f3f4;
+  cursor: pointer;
+}
+.button:hover {
+  color: #08eaf8;
+  border-color: #08eaf8;
+}
+
+.image-input {
+  display: none;
+}

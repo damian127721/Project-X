@@ -2,6 +2,7 @@ const express = require("express");
 const authMiddleware = require("../middlewares/authMiddleware");
 const User = require("../schemas/User");
 const asyncHandler = require("express-async-handler");
+const { uploadImage, deleteImage } = require("../uploadImage");
 
 const router = express.Router();
 
@@ -70,6 +71,24 @@ router.post(
     } catch (error) {
       throw new Error(error);
     }
+  })
+);
+
+router.post(
+  "/uploadImage",
+  authMiddleware,
+  asyncHandler(async (req, res) => {
+    const { image, user } = req.body;
+    if (!image) return res.status(400).send();
+    if (user.pic.src) {
+      await deleteImage(user.pic.cloudId);
+    }
+    uploadImage(image)
+      .then(async (pic) => {
+        await User.findOneAndUpdate({ _id: user._id }, { pic });
+        res.send(pic);
+      })
+      .catch((err) => res.status(500).send(err));
   })
 );
 

@@ -108,6 +108,7 @@ textarea {
   background-color: $tertiary;
   border: 2px solid $black-5;
   width: 400px;
+  height: 53px;
   border-radius: 10px;
   padding: 16px 24px;
 
@@ -128,6 +129,10 @@ textarea {
     background-color: $black-75;
     color: $black-25;
     pointer-events: none;
+  }
+
+  &.smaller {
+    height: 48px;
   }
 }
 
@@ -186,8 +191,20 @@ textarea {
       margin-top: 32px;
     }
   }
-  h6 {
-    margin-bottom: 16px;
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: $h6;
+    font-family: $regular;
+    font-weight: 400;
+    &.left {
+      margin-top: 40px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
   p {
     max-width: 640px;

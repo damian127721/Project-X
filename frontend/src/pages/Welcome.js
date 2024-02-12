@@ -107,7 +107,7 @@ export default function Welcome() {
               <div className="equal-flex">
                 <TextInput
                   error={checkedInputs && email === ""}
-                  type="text" /*Pak by měl být email*/
+                  type="email"
                   placeholder="Email"
                   setterFunction={setEmail}
                 />

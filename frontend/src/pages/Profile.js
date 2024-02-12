@@ -104,7 +104,9 @@ export default function Profile() {
       <div className={styles.profile_column}>
         <img
           className={styles.profile_picture}
-          src={selectedUser?.pic ? selectedUser?.pic : userDefaultIcon}
+          src={
+            selectedUser?.pic?.src ? selectedUser?.pic?.src : userDefaultIcon
+          }
         />
         <div className={styles.user_interact}>
           <h3>{selectedUser?.username}</h3>

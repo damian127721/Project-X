@@ -14,7 +14,7 @@ export default function UserStatusProvider({ children }) {
     if (user) {
       setUser(user);
     }
-    const s = io("http://localhost:5000");
+    const s = io("https://project-x-vzmk.onrender.com/");
     setSocket(s);
     return () => {
       s.disconnect();

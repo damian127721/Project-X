@@ -31,7 +31,7 @@ export default function Home() {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/feature/search?searchValue=${searchValue}`,
+        `/api/feature/search?searchValue=${searchValue}`,
         {
           headers: {
             Authorization: userStatus.user.token,

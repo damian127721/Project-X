@@ -44,10 +44,7 @@ export default function Registration() {
           email,
         }),
       };
-      const res = await fetch(
-        "http://localhost:5000/api/user/register",
-        options
-      );
+      const res = await fetch("/api/user/register", options);
       const data = await res.json();
 
       if (!res.ok) {

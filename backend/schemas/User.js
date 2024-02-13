@@ -8,8 +8,8 @@ const userSchema = mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     pic: {
-      src: String,
-      cloudId: String,
+      src: { type: String, default: "" },
+      cloudId: { type: String, default: "" },
     },
     bio: { type: String, default: "" },
   },

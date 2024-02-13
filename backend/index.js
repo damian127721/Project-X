@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
   console.log("production !");
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
   app.get("*", (req, res) => {
-    res.sendFile(__dirname1, "frontend", "build", "index.html");
+    res.sendFile(__dirname1, "frontend", "build", "index.html", () => {});
   });
 } else {
   console.log("development");

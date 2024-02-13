@@ -38,7 +38,7 @@ export default function Profile() {
     timeoutId.current = setTimeout(async () => {
       try {
         await axios.post(
-          "http://localhost:5000/api/feature/updateBio",
+          "/api/feature/updateBio",
           { bio: bioUpdated },
           {
             headers: {
@@ -59,7 +59,7 @@ export default function Profile() {
   const onOpenChat = async () => {
     try {
       let { data: chat } = await axios.get(
-        `http://localhost:5000/api/chat/privateChatExists?contactId=${searchedUser._id}`,
+        `/api/chat/privateChatExists?contactId=${searchedUser._id}`,
         {
           headers: {
             Authorization: user.token,
@@ -68,7 +68,7 @@ export default function Profile() {
       );
       if (!chat) {
         const { data } = await axios.post(
-          "http://localhost:5000/api/chat/createChat",
+          "/api/chat/createChat",
           {
             users: [selectedUser._id],
             isGroupChat: false,

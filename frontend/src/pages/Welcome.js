@@ -52,7 +52,7 @@ export default function Welcome() {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "/api/user/login",
         { email, password },
         {
           headers: {

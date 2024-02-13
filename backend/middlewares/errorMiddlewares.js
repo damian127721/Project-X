@@ -11,7 +11,6 @@ const errorCustom = (err, req, res, next) => {
 const notFound = (req, res, next) => {
   res.status(404);
   res.redirect("https://project-x-vzmk.onrender.com");
-  next(new Error("Not found"));
 };
 
 module.exports = { errorCustom, notFound };

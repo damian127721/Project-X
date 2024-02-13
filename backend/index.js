@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const asyncHandler = require("express-async-handler");
 
 const { errorCustom, notFound } = require("./middlewares/errorMiddlewares");
 const featureRoutes = require("./routes/featureRoutes");
@@ -28,12 +27,9 @@ const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === "production") {
   console.log("production !");
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
-  app.get(
-    "*",
-    asyncHandler((req, res) => {
-      res.sendFile(__dirname1, "frontend", "build", "index.html", () => {});
-    })
-  );
+  app.get("/", (req, res) => {
+    res.sendFile(__dirname1, "frontend", "build", "index.html");
+  });
 } else {
   console.log("development");
   app.get("/", (req, res) => {

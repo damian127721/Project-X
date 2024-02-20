@@ -21,7 +21,11 @@
 }
 .message-box .message-icon {
   height: 48px;
+  width: 48px;
+  object-fit: cover;
+  object-position: center;
   position: relative;
+  border-radius: 50%;
 }
 .message-box p {
   min-height: 100%;

@@ -12,13 +12,9 @@ export default function UserStatusProvider({ children }) {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
+      navigate("/home");
       setUser(user);
     }
-    const s = io("https://project-x-vzmk.onrender.com/");
-    setSocket(s);
-    return () => {
-      s.disconnect();
-    };
   }, []);
 
   useEffect(() => {
@@ -29,7 +25,7 @@ export default function UserStatusProvider({ children }) {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, socket }}>
+    <UserContext.Provider value={{ user, setUser, socket, setSocket }}>
       {children}
     </UserContext.Provider>
   );

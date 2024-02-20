@@ -8,6 +8,8 @@ export default function ProfileNav({ profileOpened }) {
   const logout = () => {
     localStorage.removeItem("user");
     userStatus.setUser("");
+    userStatus.socket?.disconnect();
+    userStatus.setSocket();
   };
 
   return (

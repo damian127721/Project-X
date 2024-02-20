@@ -390,6 +390,8 @@ textarea:focus {
 .profile-pic {
   width: 64px;
   height: 64px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
   user-select: none;
   cursor: pointer;

@@ -52,14 +52,26 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   console.log(socket.id + " connected");
+  const { userId } = socket.handshake.query;
+
+  socket.join(userId);
 
   socket.on("disconnect", () => console.log(socket.id + " disconnected"));
   socket.on("message", (message, room) => {
     socket.to(room).emit("message", message);
   });
   socket.on("join-room", (room) => {
-    //! Musím pak nutňo přidat leave-room, jinak mi bude v jednom chatu user dostavat zpravy od všech co se k nim připojil ?
     socket.join(room);
-    console.log(`User ${socket.id} joined room ${room}`);
+    console.log(`User ${socket.id} has joined room ${room}`);
+  });
+
+  socket.on("leave-room", (room) => {
+    socket.leave(room);
+    console.log(`User ${socket.id} has left room ${room}`);
+  });
+
+  socket.on("notif", (userId) => {
+    socket.to(userId).emit("notif");
+    console.log("notif " + userId);
   });
 });

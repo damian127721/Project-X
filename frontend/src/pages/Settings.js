@@ -33,9 +33,8 @@ const Settings = () => {
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
     try {
-      console.log("upload to api");
       const { data } = await axios.post(
-        "/api/feature/uploadImage",
+        "http://localhost:5000/api/feature/uploadImage",
         { image: base64 },
         {
           headers: {
@@ -44,6 +43,7 @@ const Settings = () => {
         }
       );
       localStorage.setItem("user", JSON.stringify({ ...user, pic: data }));
+      userStatus.setUser({ ...user, pic: data });
     } catch (error) {
       console.log(error);
     }
@@ -66,23 +66,23 @@ const Settings = () => {
         <main className="blue-box">
           <h5>Change password</h5>
           <form className={styles["settings-form"]}>
-            <label htmlFor="old-password">
+            <label htmlFor="old-password" className="not-allowed">
               Old password
               <TextInput
                 /* error={checkedInputs && email === ""} */
                 type="password"
                 id={"old-password"}
-                /* setterFunction={setEmail} */
+                setterFunction={() => {}}
                 state="smaller not-avaible"
               />
             </label>
-            <label htmlFor="new-password">
+            <label htmlFor="new-password" className="not-allowed">
               New password
               <TextInput
                 /* error={checkedInputs && email === ""} */
                 type="password"
                 id={"new-password"}
-                /* setterFunction={setEmail} */
+                setterFunction={() => {}}
                 state="smaller not-avaible"
               />
             </label>
@@ -90,13 +90,13 @@ const Settings = () => {
           </form>
           <h5>Change name</h5>
           <form className={styles["settings-form"]}>
-            <label htmlFor="new-username">
+            <label htmlFor="new-username" className="not-allowed">
               New username
               <TextInput
                 /* error={checkedInputs && email === ""} */
-                type="password"
+                type="text"
                 id={"new-username"}
-                /* setterFunction={setEmail} */
+                setterFunction={() => {}}
                 state="smaller not-avaible"
               />
             </label>

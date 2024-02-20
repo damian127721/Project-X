@@ -13,11 +13,34 @@ import ProfileNav from "../components/ProfileNav";
 import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { io } from "socket.io-client";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [foundPeople, setFoundPeople] = useState([]);
   const userStatus = useContext(UserContext);
+
+  useEffect(() => {
+    if (userStatus.socket) return;
+    let userId;
+    if (!userStatus.user) {
+      // V případě reloadu ještě nebude dostupný user objekt při prvním renderu
+      userId = JSON.parse(localStorage.getItem("user"))?._id;
+    } else {
+      userId = userStatus.user._id;
+    }
+    if (!userId) return;
+    const s = io.connect("http://localhost:5000", {
+      query: {
+        userId,
+      },
+    });
+    userStatus.setSocket(s);
+
+    s.on("notif", () => {
+      console.log("notification");
+    });
+  }, []);
 
   const [windowsOpened, setWindowsOpened] = useState({
     menu: false,
@@ -31,7 +54,7 @@ export default function Home() {
 
     try {
       const res = await axios.get(
-        `/api/feature/search?searchValue=${searchValue}`,
+        `http://localhost:5000/api/feature/search?searchValue=${searchValue}`,
         {
           headers: {
             Authorization: userStatus.user.token,

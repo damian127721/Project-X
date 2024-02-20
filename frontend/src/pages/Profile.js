@@ -10,7 +10,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const searchedUser = useLocation().state?.user;
   const [selectedUser, setSelectedUser] = useState(null);
   const [bio, setBio] = useState("");
@@ -38,7 +38,7 @@ export default function Profile() {
     timeoutId.current = setTimeout(async () => {
       try {
         await axios.post(
-          "/api/feature/updateBio",
+          "http://localhost:5000/api/feature/updateBio",
           { bio: bioUpdated },
           {
             headers: {
@@ -50,6 +50,7 @@ export default function Profile() {
           "user",
           JSON.stringify({ ...user, bio: bioUpdated })
         );
+        setUser({ ...user, bio: bioUpdated });
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +60,7 @@ export default function Profile() {
   const onOpenChat = async () => {
     try {
       let { data: chat } = await axios.get(
-        `/api/chat/privateChatExists?contactId=${searchedUser._id}`,
+        `http://localhost:5000/api/chat/privateChatExists?contactId=${searchedUser._id}`,
         {
           headers: {
             Authorization: user.token,
@@ -68,7 +69,7 @@ export default function Profile() {
       );
       if (!chat) {
         const { data } = await axios.post(
-          "/api/chat/createChat",
+          "http://localhost:5000/api/chat/createChat",
           {
             users: [selectedUser._id],
             isGroupChat: false,

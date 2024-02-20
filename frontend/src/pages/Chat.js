@@ -30,7 +30,7 @@ const Chat = () => {
     const fetchMessages = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/message/getChatMessages?chatId=${chat._id}`,
+          `/api/message/getChatMessages?chatId=${chat._id}`,
           {
             headers: {
               Authorization: userState.user.token,
@@ -67,10 +67,7 @@ const Chat = () => {
         }),
         method: "POST",
       };
-      const res = await fetch(
-        "http://localhost:5000/api/message/sendMessage",
-        config
-      );
+      const res = await fetch("/api/message/sendMessage", config);
 
       const message = await res.json();
       setMessages((prevMessages) => {

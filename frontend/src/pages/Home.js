@@ -30,7 +30,7 @@ export default function Home() {
       userId = userStatus.user._id;
     }
     if (!userId) return;
-    const s = io.connect("http://localhost:5000", {
+    const s = io.connect("https://project-x-vzmk.onrender.com", {
       query: {
         userId,
       },
@@ -54,7 +54,7 @@ export default function Home() {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/feature/search?searchValue=${searchValue}`,
+        `/api/feature/search?searchValue=${searchValue}`,
         {
           headers: {
             Authorization: userStatus.user.token,

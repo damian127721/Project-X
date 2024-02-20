@@ -34,7 +34,7 @@ const Settings = () => {
     const base64 = await convertBase64(file);
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/feature/uploadImage",
+        "/api/feature/uploadImage",
         { image: base64 },
         {
           headers: {
